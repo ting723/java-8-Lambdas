@@ -14,13 +14,8 @@ import java.util.stream.Stream;
  */
 public class Question2 {
 
-    private List<Artist> artists = new ArrayList<>();
-
-    public Question2() {
-        init();
-    }
-
-    private void init() {
+    private List<Artist> init() {
+        List<Artist> artists = new ArrayList<>();
         Artist artist1 = new Artist();
         Artist child11 = new Artist();
         Artist child12 = new Artist();
@@ -35,6 +30,7 @@ public class Question2 {
 
         artists.add(artist1);
         artists.add(artist2);
+        return artists;
     }
 
     /**
@@ -42,7 +38,7 @@ public class Question2 {
      */
     private void topicCode() {
         int totalMember = 0;
-        for (Artist artist : artists) {
+        for (Artist artist : init()) {
             Stream<Artist> members = artist.getMembers();
             totalMember += members.count();
         }
@@ -57,14 +53,17 @@ public class Question2 {
 //        long count = result.stream().reduce(0l, (x, y) -> x + y);
 //        System.out.println(count);
 
-        long rc= artists.stream().map(artist -> artist.getMembers()).count();
+        List<Artist> artists = init();
+        int rc = artists.stream().map(artist -> artist.getMembers().count())
+//                .reduce(0l, (acc, x) -> acc + x).intValue();
+                .reduce(0l, Long::sum).intValue();
         System.out.println(rc);
     }
 
     public static void main(String[] args) {
         Question2 question2 = new Question2();
-//        System.out.println("外部迭代:");
-//        question2.topicCode();
+        System.out.println("外部迭代:");
+        question2.topicCode();
         System.out.println("内部迭代:");
         question2.solutionCode();
     }

@@ -9,7 +9,6 @@ import com.zhanglw.java8lambdas.base.Track;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -39,6 +38,24 @@ public class Question1 {
      * @return
      */
     List<String> getArtistNation(List<Artist> artists) {
+        // 转换成匿名函数
+//        return artists.stream().flatMap(new Function<Artist, Stream<? extends String>>() {
+//            @Override
+//            public Stream<? extends String> apply(Artist artist) {
+//                return Stream.of(artist.getName(), artist.getNationality());
+//            }
+//        })
+//                .collect(toList());
+
+        // 转换成for loop
+//        List<String> list = new ArrayList<>();
+//        for (Artist artist : artists) {
+//            for (String s : Arrays.asList(artist.getName(), artist.getNationality())) {
+//                list.add(s);
+//            }
+//        }
+//        return list;
+
         return artists.stream().flatMap(artist -> Stream.of(artist.getName(), artist.getNationality()))
                 .collect(toList());
     }
@@ -50,7 +67,7 @@ public class Question1 {
      * @return
      */
     List<Album> getMaxThreeAlbum(List<Album> albumList) {
-        return albumList.stream().filter(album -> album.getTracks() != null && album.getTracks().size() <= 3).collect(Collectors.toList());
+        return albumList.stream().filter(album -> album.getTracks() != null && album.getTracks().size() <= 3).collect(toList());
     }
 
     public static void main(String[] args) {
@@ -66,17 +83,17 @@ public class Question1 {
         List<Album> albumList = new ArrayList<>();
         Album album = new Album();
         album.setName("专辑11");
-        album.setTracks(Arrays.asList(new Track("17",188), new Track("20",200)));
+        album.setTracks(Arrays.asList(new Track("17", 188), new Track("20", 200)));
 
         Album album1 = new Album();
         album1.setName("专辑22");
-        album1.setTracks(Arrays.asList(new Track("12",188), new Track("20",200),
-                new Track("12",188), new Track("20",200)
-                ));
+        album1.setTracks(Arrays.asList(new Track("12", 188), new Track("20", 200),
+                new Track("12", 188), new Track("20", 200)
+        ));
 
         albumList.add(album);
         albumList.add(album1);
-        System.out.println(JSON.toJSONString(question1.getMaxThreeAlbum(albumList),SerializerFeature.PrettyFormat));
+        System.out.println(JSON.toJSONString(question1.getMaxThreeAlbum(albumList), SerializerFeature.PrettyFormat));
 
     }
 }
