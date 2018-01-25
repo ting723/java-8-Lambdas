@@ -4,7 +4,7 @@
  * Update : 2018/1/24 11:36
  * Descriptions :
  */
-package com.zhanglw.java8lambdas.chapter3;
+package com.zhanglw.java8lambdas.chapter03;
 
 // Question3
 /*

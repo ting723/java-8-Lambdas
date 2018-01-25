@@ -1,4 +1,4 @@
-package com.zhanglw.java8lambdas.chapter2;
+package com.zhanglw.java8lambdas.chapter02;
 
 /**
  * Question 1:
